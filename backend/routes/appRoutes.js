@@ -82,12 +82,35 @@ router.post("/userSignup", async (req, res) => {
         const { name, email } = req.body;
 
         await new User({ name, email, password: hashedPassword }).save();
-        res.status(201).json({ message: "User created successfully" });
+        res.status(201).json({ message: "User created successfully"});
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: "Internal server error" });
     }
 });
 
+// ───── GET USER DETAILS ─────
+router.get("/userDetails/:id", async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).select("-password");
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        res.status(200).json({ user });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+// ───── GET DESIGNER DETAILS ─────
+router.get("/designerDetails/:id", async (req, res) => {
+    try {
+        const designer = await Designer.findById(req.params.id).select("-password");
+        if (!designer) return res.status(404).json({ message: "Designer not found" });
+
+        res.status(200).json({ designer });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 module.exports = router;

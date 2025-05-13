@@ -113,4 +113,22 @@ router.get("/designerDetails/:id", async (req, res) => {
     }
 });
 
+
+// ───── PUT UPDATE USER NAME ─────
+router.put("/userDetails/:id", async (req, res) => {
+    try {
+        const { name } = req.body;
+        if (!name) return res.status(400).json({ message: "Name is required" });
+
+        const user = await User.findByIdAndUpdate(req.params.id, { name }, { new: true, runValidators: true }).select("-password");
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        res.status(200).json({ user, message: "Name updated successfully" });
+    } catch (error) {
+
+        res.status(500).json({ message: "Internal server error", error:error.message });
+    }
+});
+
 module.exports = router;

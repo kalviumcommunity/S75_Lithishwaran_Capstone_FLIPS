@@ -1,4 +1,3 @@
-import React from 'react';
 import { Search, MessageSquare, ShoppingBag, User } from 'lucide-react';
 
 const Navbar = () => {

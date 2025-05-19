@@ -95,3 +95,4 @@ A structured 21-day plan to guide the complete development of **FLIPS**, from de
 ---
 
 **Backend Deploy link :** "https://s75-lithishwaran-capstone-flips.onrender.com"
+**frontend Deploy link :** "https://s75-lithishwaran-capstone-flips-1.onrender.com"
